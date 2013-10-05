@@ -34,14 +34,6 @@ The benefits of this approach are ease of debugging and less files to deploy
     var configure = Configure
         .With().DefaultBuilder();
 
-## Is a reference necessary
-
-You may be thinking that having an assembly reference to achieve this functionality is undesirable. If this is the case you should avoid the reference by taking the following steps.
- 
-* Copy [LoggingFactory](https://github.com/SimonCropp/NServiceBus.CommonLogging/blob/master/NServiceBus.CommonLogging/LoggerFactory.cs) into your project 
-* Copy [Logger](https://github.com/SimonCropp/NServiceBus.CommonLogging/blob/master/NServiceBus.CommonLogging/Logger.cs) into your project
-* Call this code when you application starts `NServiceBus.LogManager.LoggerFactory = new LoggerFactory();`
-
 ## Icon
 
 <a href="http://thenounproject.com/noun/bus/#icon-No16553" target="_blank">Bus</a> designed by <a href="http://thenounproject.com/rafa.goicoechea" target="_blank">Rafa Goicoechea</a> from The Noun Project
