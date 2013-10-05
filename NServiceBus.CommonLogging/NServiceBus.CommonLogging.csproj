@@ -11,7 +11,7 @@
     <AssemblyName>NServiceBus.CommonLogging</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FodyPath>..\packages\Fody.1.15.0.0</FodyPath>
+    <FodyPath>..\packages\Fody.1.17.4.0</FodyPath>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -57,11 +57,11 @@
     </Reference>
     <Reference Include="NServiceBus, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NServiceBus.Interfaces.4.0.3\lib\net40\NServiceBus.dll</HintPath>
+      <HintPath>..\packages\NServiceBus.Interfaces.4.0.5\lib\net40\NServiceBus.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NServiceBus.4.0.3\lib\net40\NServiceBus.Core.dll</HintPath>
+      <HintPath>..\packages\NServiceBus.4.0.5\lib\net40\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="Scalpel">
       <HintPath>..\packages\Scalpel.Fody.0.12.3\Lib\NET35\Scalpel.dll</HintPath>
@@ -82,7 +82,9 @@
     <Compile Include="LoggerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NServiceBus.CommonLogging-CodeOnly.nuspec" />
     <None Include="key.snk" />
+    <None Include="NServiceBus.CommonLogging.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -91,6 +93,28 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)Tools\Pepita\PepitaGet.targets" />
+  <UsingTask TaskName="PepitaPackage.CreatePackageTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
+  <UsingTask TaskName="FileUpdate" AssemblyFile="$(SolutionDir)Tools\MSBuild.Community.Tasks.dll" />
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <FilesToDelete Include="$(SolutionDir)NuGetBuild\**\*.*" />
+      <FilesToDelete Include="$(SolutionDir)NuGetBuildCodeOnly\**\*.*" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
+    <Copy SourceFiles="$(OutputPath)NServiceBus.CommonLogging.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET45" />
+    <Copy SourceFiles="$(OutputPath)NServiceBus.CommonLogging.pdb" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET45" />
+    <Copy SourceFiles="$(OutputPath)NServiceBus.CommonLogging.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET45" />
+    <Copy SourceFiles="$(ProjectDir)NServiceBus.CommonLogging.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(OutputPath)NServiceBus.CommonLogging.dll" />
+    <Copy SourceFiles="$(ProjectDir)\LoggerFactory.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\LoggerFactory.cs.pp" />
+    <Copy SourceFiles="$(ProjectDir)\Logger.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\Logger.cs.pp" />
+    <Copy SourceFiles="$(ProjectDir)\CommonLoggingConfigurator.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\CommonLoggingConfigurator.cs.pp" />
+    <ItemGroup>
+      <CsFiles Include="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\*.cs.pp" />
+    </ItemGroup>
+    <FileUpdate Files="@(CsFiles)" Regex="namespace NServiceBus.CommonLogging" ReplacementText="namespace $rootnamespace$.NServiceBusCommonLogging" />
+    <Copy SourceFiles="$(ProjectDir)\NServiceBus.CommonLogging-CodeOnly.nuspec" DestinationFolder="$(SolutionDir)NuGetBuildCodeOnly\" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuildCodeOnly" MetadataAssembly="$(OutputPath)\NServiceBus.CommonLogging.dll" />
+  </Target>
   <Import Project="Fody.targets" />
 </Project>

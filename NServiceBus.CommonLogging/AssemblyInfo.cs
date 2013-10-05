@@ -2,5 +2,5 @@
 
 [assembly: AssemblyTitle("NServiceBus.CommonLogging")]
 [assembly: AssemblyProduct("NServiceBus.CommonLogging")]
-[assembly: AssemblyVersion("0.1.1")]
-[assembly: AssemblyFileVersion("0.1.1")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]
