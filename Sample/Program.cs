@@ -3,32 +3,26 @@ using System.Diagnostics;
 using Common.Logging;
 using NServiceBus;
 using NServiceBus.CommonLogging;
-using NServiceBus.Installation.Environments;
+using NServiceBus.Persistence;
 
-namespace Sample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main()
+        LogManager.Adapter = new MemoryAdapter();
+
+        CommonLoggingConfigurator.Configure();
+
+        var configure = Configure.With(b => b.EndpointName("NServiceBusCommonLoggingSample"));
+        configure.UseSerialization<Json>();
+        configure.UseTransport<Msmq>();
+        configure.UsePersistence<InMemory>();
+        configure.EnableInstallers();
+        using (var bus = configure.CreateBus())
         {
-            Configure.GetEndpointNameAction = () => "NServiceBusCommonLoggingSample";
-            LogManager.Adapter = new MemoryAdapter();
-
-            CommonLoggingConfigurator.Configure();
-
-            Configure.Serialization.Json();
-
-            Configure.With()
-                .DefaultBuilder()
-                .UseTransport<Msmq>()
-                .UnicastBus()
-                .CreateBus()
-                .Start(() => Configure.Instance.ForInstallationOn<Windows>().Install());
-            
-            Debug.WriteLine(MemoryLog.Messages);
-
+            bus.Start();
+            Trace.WriteLine(MemoryLog.Messages);
             Console.ReadLine();
-
         }
     }
 }
