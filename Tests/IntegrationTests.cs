@@ -18,9 +18,7 @@ namespace Tests
 
             var configure = Configure.With(b => b.EndpointName("NServiceBusCommonLoggingTests"));
             configure.UseSerialization<Json>();
-            configure.UseTransport<Msmq>();
             configure.UsePersistence<InMemory>();
-            configure.EnableInstallers();
             using (var bus = configure.CreateBus())
             {
                 bus.Start();
