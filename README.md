@@ -1,4 +1,4 @@
-![Icon](https://raw.github.com/SimonCropp/NServiceBus.CommonLogging/master/Icons/package_icon.png)
+![Icon](https://raw.github.com/Particular/NServiceBus.CommonLogging/master/Icons/package_icon.png)
 
 NServiceBus.CommonLogging
 =========================
