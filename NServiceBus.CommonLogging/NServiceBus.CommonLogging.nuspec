@@ -14,7 +14,7 @@
     <language>en-AU</language>
     <tags>NServiceBus, CommonLogging, NServiceBus.CommonLogging</tags>
 	  <dependencies>
-		  <dependency id="NServiceBus" version="5.0" />
+		  <dependency id="NServiceBus" version="5.0.0-beta0001" />
 		  <dependency id="Common.Logging" version="2.1.2" />
 	  </dependencies>
   </metadata>
