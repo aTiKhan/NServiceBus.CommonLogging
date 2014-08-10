@@ -1,7 +1,7 @@
 ﻿using System;
 using NServiceBus.Logging;
 
-namespace NServiceBus.CommonLogging
+namespace NServiceBusCommonLogging
 {
     class Logger : ILog
     {

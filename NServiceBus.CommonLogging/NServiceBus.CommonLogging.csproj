@@ -63,7 +63,7 @@
     </Reference>
     <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NServiceBus.5.0.0-beta0001\lib\net45\NServiceBus.Core.dll</HintPath>
+      <HintPath>..\packages\NServiceBus.5.0.0-beta0002\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="Logger.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="CommonLoggingConfigurator.cs" />
+    <Compile Include="CommonLoggingFactory.cs" />
     <Compile Include="LoggerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +104,7 @@
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" Version="$(GfvLegacySemVerPadded)" />
     <Copy SourceFiles="$(ProjectDir)\LoggerFactory.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\LoggerFactory.cs.pp" />
     <Copy SourceFiles="$(ProjectDir)\Logger.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\Logger.cs.pp" />
-    <Copy SourceFiles="$(ProjectDir)\CommonLoggingConfigurator.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\CommonLoggingConfigurator.cs.pp" />
+    <Copy SourceFiles="$(ProjectDir)\CommonLoggingFactory.cs" DestinationFiles="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\CommonLoggingFactory.cs.pp" />
     <ItemGroup>
       <CsFiles Include="$(SolutionDir)NuGetBuildCodeOnly\Content\NServiceBusCommonLogging\*.cs.pp" />
     </ItemGroup>

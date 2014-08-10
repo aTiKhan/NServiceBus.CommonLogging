@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using Common.Logging;
 using NServiceBus;
-using NServiceBus.CommonLogging;
 using NServiceBus.Persistence;
 
 class Program
@@ -11,13 +10,16 @@ class Program
     {
         LogManager.Adapter = new MemoryAdapter();
 
-        CommonLoggingConfigurator.Configure();
+        NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
 
-        var configure = Configure.With(b => b.EndpointName("NServiceBusCommonLoggingSample"));
-        configure.UseSerialization<Json>();
+        var configure = Configure.With(b =>
+        {
+            b.EndpointName("NServiceBusCommonLoggingSample");
+            b.UseSerialization<Json>();
+            b.EnableInstallers();
+        });
         configure.UseTransport<Msmq>();
         configure.UsePersistence<InMemory>();
-        configure.EnableInstallers();
         using (var bus = configure.CreateBus())
         {
             bus.Start();

@@ -1,9 +1,7 @@
 ﻿using Common.Logging;
 using NServiceBus;
-using NServiceBus.CommonLogging;
 using NServiceBus.Persistence;
 using NUnit.Framework;
-
 
 [TestFixture]
 public class IntegrationTests
@@ -13,12 +11,15 @@ public class IntegrationTests
     {
         LogManager.Adapter = new MemoryAdapter();
 
-        CommonLoggingConfigurator.Configure();
+        NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
 
-        var configure = Configure.With(b => b.EndpointName("NServiceBusCommonLoggingTests"));
-        configure.UseSerialization<Json>();
+        var configure = Configure.With(b =>
+        {
+            b.EndpointName("NServiceBusCommonLoggingTests");
+            b.UseSerialization<Json>();
+            b.EnableInstallers();
+        });
         configure.UsePersistence<InMemory>();
-        configure.EnableInstallers();
         using (var bus = configure.CreateBus())
         {
             bus.Start();
