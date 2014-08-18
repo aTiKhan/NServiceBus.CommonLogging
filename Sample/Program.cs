@@ -17,9 +17,9 @@ class Program
             b.EndpointName("NServiceBusCommonLoggingSample");
             b.UseSerialization<Json>();
             b.EnableInstallers();
+            b.UseTransport<Msmq>();
+            b.UsePersistence<InMemory>();
         });
-        configure.UseTransport<Msmq>();
-        configure.UsePersistence<InMemory>();
         using (var bus = configure.CreateBus())
         {
             bus.Start();
