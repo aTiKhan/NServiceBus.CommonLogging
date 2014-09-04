@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using Common.Logging;
 using NServiceBus;
-using NServiceBus.Persistence;
 
 class Program
 {
@@ -12,15 +11,14 @@ class Program
 
         NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
 
-        var configure = Configure.With(b =>
-        {
-            b.EndpointName("NServiceBusCommonLoggingSample");
-            b.UseSerialization<Json>();
-            b.EnableInstallers();
-            b.UseTransport<Msmq>();
-            b.UsePersistence<InMemory>();
-        });
-        using (var bus = configure.CreateBus())
+
+        var busConfig = new BusConfiguration();
+        busConfig.EndpointName("CommonLoggingSample");
+        busConfig.UseSerialization<JsonSerializer>();
+        busConfig.EnableInstallers();
+        busConfig.UsePersistence<InMemoryPersistence>();
+
+        using (var bus = Bus.Create(busConfig))
         {
             bus.Start();
             Trace.WriteLine(MemoryLog.Messages);
