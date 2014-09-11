@@ -1,16 +1,15 @@
 ﻿using System;
+using Common.Logging;
 using Common.Logging.Simple;
 using NServiceBus;
-using NsbLogManager = NServiceBus.Logging.LogManager;
-using CommonLogManager = Common.Logging.LogManager;
 
 class Program
 {
     static void Main()
     {
-        CommonLogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
+        LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
 
-        NsbLogManager.Use<CommonLoggingFactory>();
+        NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
 
         var busConfig = new BusConfiguration();
         busConfig.EndpointName("CommonLoggingSample");
