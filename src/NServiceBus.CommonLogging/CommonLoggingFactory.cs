@@ -1,10 +1,10 @@
 ﻿namespace NServiceBus
 {
-    using NServiceBus.Logging;
+    using Logging;
     using NServiceBusCommonLogging;
 
     /// <summary>
-    /// Configure NServiceBus logging messages to use CommonLogging. User by calling LogManager.UseLogging&lt;CommonLogging&gt;.
+    /// Configure NServiceBus logging messages to use CommonLogging. Use by calling <see cref="LogManager.Use{T}"/> the T is <see cref="CommonLoggingFactory"/>.
     /// </summary>
     public class CommonLoggingFactory : LoggingFactoryDefinition
     {
