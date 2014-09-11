@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Diagnostics;
-using Common.Logging;
+using Common.Logging.Simple;
 using NServiceBus;
+using NsbLogManager = NServiceBus.Logging.LogManager;
+using CommonLogManager = Common.Logging.LogManager;
 
 class Program
 {
     static void Main()
     {
-        LogManager.Adapter = new MemoryAdapter();
+        CommonLogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
 
-        NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
-
+        NsbLogManager.Use<CommonLoggingFactory>();
 
         var busConfig = new BusConfiguration();
         busConfig.EndpointName("CommonLoggingSample");
@@ -21,7 +21,6 @@ class Program
         using (var bus = Bus.Create(busConfig))
         {
             bus.Start();
-            Trace.WriteLine(MemoryLog.Messages);
             Console.ReadLine();
         }
     }

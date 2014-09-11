@@ -1,6 +1,7 @@
-﻿using Common.Logging;
-using NServiceBus;
+﻿using NServiceBus;
 using NUnit.Framework;
+using NsbLogManager = NServiceBus.Logging.LogManager;
+using CommonLogManager = Common.Logging.LogManager;
 
 [TestFixture]
 public class IntegrationTests
@@ -8,9 +9,9 @@ public class IntegrationTests
     [Test]
     public void Ensure_log_messages_are_redirected()
     {
-        LogManager.Adapter = new MemoryAdapter();
+        CommonLogManager.Adapter = new MemoryAdapter();
 
-        NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
+        NsbLogManager.Use<CommonLoggingFactory>();
 
 
         var busConfig = new BusConfiguration();

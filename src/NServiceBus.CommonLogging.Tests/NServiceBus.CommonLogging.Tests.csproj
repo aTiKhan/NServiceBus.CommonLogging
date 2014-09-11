@@ -37,8 +37,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\packages\NServiceBus.5.0.0-beta0004\lib\net45\NServiceBus.Core.dll</HintPath>
+    <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.5.0.0-beta0005\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -53,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests.cs" />
+    <Compile Include="MemoryAdapter.cs" />
+    <Compile Include="MemoryLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
