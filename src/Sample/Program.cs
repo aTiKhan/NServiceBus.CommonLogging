@@ -20,6 +20,7 @@ class Program
         using (var bus = Bus.Create(busConfig))
         {
             bus.Start();
+            bus.SendLocal(new MyMessage());
             Console.ReadLine();
         }
     }
