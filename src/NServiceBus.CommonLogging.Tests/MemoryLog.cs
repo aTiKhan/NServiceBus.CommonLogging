@@ -11,10 +11,10 @@ public class MemoryLog : AbstractLogger
     }
 
     public static List<object> Messages = new List<object>();
-    public override bool IsTraceEnabled{get { return true; }}
-    public override bool IsDebugEnabled{get { return true; }}
-    public override bool IsErrorEnabled{get { return true; }}
-    public override bool IsFatalEnabled{get { return true; }}
-    public override bool IsInfoEnabled{get { return true; }}
-    public override bool IsWarnEnabled{get { return true; }}
+    public override bool IsTraceEnabled => true;
+    public override bool IsDebugEnabled => true;
+    public override bool IsErrorEnabled => true;
+    public override bool IsFatalEnabled => true;
+    public override bool IsInfoEnabled => true;
+    public override bool IsWarnEnabled => true;
 }
