@@ -1,4 +1,5 @@
-﻿using NServiceBus;
+﻿using System.Threading.Tasks;
+using NServiceBus;
 using NUnit.Framework;
 using NsbLogManager = NServiceBus.Logging.LogManager;
 using CommonLogManager = Common.Logging.LogManager;
@@ -7,23 +8,26 @@ using CommonLogManager = Common.Logging.LogManager;
 public class IntegrationTests
 {
     [Test]
-    public void Ensure_log_messages_are_redirected()
+    public async Task Ensure_log_messages_are_redirected()
     {
         CommonLogManager.Adapter = new MemoryAdapter();
 
         NsbLogManager.Use<CommonLoggingFactory>();
 
 
-        var busConfig = new BusConfiguration();
-        busConfig.EndpointName("CommonLoggingTests");
-        busConfig.UseSerialization<JsonSerializer>();
-        busConfig.EnableInstallers();
-        busConfig.UsePersistence<InMemoryPersistence>();
-
-        using (var bus = Bus.Create(busConfig))
+        var endpointConfiguration = new EndpointConfiguration("CommonLoggingTests");
+        endpointConfiguration.UseSerialization<JsonSerializer>();
+        endpointConfiguration.EnableInstallers();
+        endpointConfiguration.SendFailedMessagesTo("error");
+        endpointConfiguration.UsePersistence<InMemoryPersistence>();
+        var endpoint = await Endpoint.Start(endpointConfiguration);
+        try
         {
-            bus.Start();
-            Assert.IsNotEmpty(MemoryLog.Messages);
+            Assert.IsNotEmpty(LogMessageCapture.LoggingEvents);
+        }
+        finally
+        {
+            await endpoint.Stop();
         }
     }
 }

@@ -5,11 +5,11 @@ public class MemoryAdapter : ILoggerFactoryAdapter
 {
     public ILog GetLogger(Type type)
     {
-        return new MemoryLog();
+        return new LogMessageCapture();
     }
 
     public ILog GetLogger(string name)
     {
-        return new MemoryLog();
+        return new LogMessageCapture();
     }
 }

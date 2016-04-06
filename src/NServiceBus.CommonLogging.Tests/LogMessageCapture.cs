@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Common.Logging;
 using Common.Logging.Factory;
 
-public class MemoryLog : AbstractLogger 
+public class LogMessageCapture : AbstractLogger
 {
     protected override void WriteInternal(LogLevel level, object message, Exception exception)
     {
-        Messages.Add(message);
+        LoggingEvents.Add(message);
     }
 
-    public static List<object> Messages = new List<object>();
+    public static List<object> LoggingEvents = new List<object>();
     public override bool IsTraceEnabled => true;
     public override bool IsDebugEnabled => true;
     public override bool IsErrorEnabled => true;
