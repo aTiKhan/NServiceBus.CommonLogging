@@ -1,8 +1,8 @@
-﻿using System;
-using NServiceBus.Logging;
-
-namespace NServiceBusCommonLogging
+﻿namespace NServiceBus.Logging.CommonLogging
 {
+    using System;
+    using Logging;
+
     class LoggerFactory : ILoggerFactory
     {
         public ILog GetLogger(Type type)
