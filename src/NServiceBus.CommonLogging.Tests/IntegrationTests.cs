@@ -20,14 +20,16 @@ public class IntegrationTests
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
-        var endpoint = await Endpoint.Start(endpointConfiguration);
+        var endpoint = await Endpoint.Start(endpointConfiguration)
+            .ConfigureAwait(false);
         try
         {
             Assert.IsNotEmpty(LogMessageCapture.LoggingEvents);
         }
         finally
         {
-            await endpoint.Stop();
+            await endpoint.Stop()
+                .ConfigureAwait(false);
         }
     }
 }
