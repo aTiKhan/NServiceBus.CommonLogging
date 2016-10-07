@@ -87,9 +87,6 @@
     <Compile Include="LoggerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\GitVersionConfig.yaml">
-      <Link>GitVersionConfig.yaml</Link>
-    </None>
     <None Include="..\..\packaging\nuget\NServiceBus.CommonLogging.nuspec">
       <Link>NServiceBus.CommonLogging.nuspec</Link>
       <SubType>Designer</SubType>
