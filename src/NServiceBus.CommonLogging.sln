@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}"
 EndProject
@@ -12,7 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{58A5B477-EAE5-4F8E-AC9E-0AA6691ADDFD}"
 	ProjectSection(SolutionItems) = preProject
 		..\GitVersion.yml = ..\GitVersion.yml
-		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
 Global
