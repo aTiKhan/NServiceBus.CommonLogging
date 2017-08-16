@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Common.Logging" Version="3.3.1" />
-    <PackageReference Include="Common.Logging.Core" Version="3.3.1" />
-    <PackageReference Include="NServiceBus" Version="6.3.3" />
-    <ProjectReference Include="..\NServiceBus.CommonLogging\NServiceBus.CommonLogging.csproj"/>
+    <ProjectReference Include="..\NServiceBus.CommonLogging\NServiceBus.CommonLogging.csproj" />
+    <PackageReference Include="Common.Logging" Version="3.*" />
   </ItemGroup>
 </Project>

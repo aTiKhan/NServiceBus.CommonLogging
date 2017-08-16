@@ -14,11 +14,10 @@ public class IntegrationTests
 
         NsbLogManager.Use<CommonLoggingFactory>();
 
-
         var endpointConfiguration = new EndpointConfiguration("CommonLoggingTests");
-        endpointConfiguration.UseSerialization<JsonSerializer>();
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.SendFailedMessagesTo("error");
+        endpointConfiguration.UseTransport<LearningTransport>();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
         var endpoint = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
