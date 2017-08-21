@@ -1,22 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Optimize>False</Optimize>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="NServiceBus.CommonLogging.approved.cs" />
     <Compile Remove="NServiceBus.CommonLogging.received.cs" />
-    <PackageReference Include="ApprovalTests" Version="3.0.13" />
-    <PackageReference Include="ApprovalTests" Version="3.*" />
-    <PackageReference Include="ApprovalUtilities" Version="3.*" />
     <PackageReference Include="Mono.Cecil" Version="0.10.0-*" />
     <PackageReference Include="NUnit" Version="3.*" />
+    <ProjectReference Include="..\NServiceBus.CommonLogging\NServiceBus.CommonLogging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <Compile Remove="APIApprovals.cs" />
+    <Compile Remove="ApprovalTestConfig.cs" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+    <PackageReference Include="ApprovalTests" Version="3.*" />
+    <PackageReference Include="ApprovalUtilities" Version="3.*" />
     <PackageReference Include="ApiApprover" Version="6.1.0-*" />
     <PackageReference Include="PublicApiGenerator" Version="6.1.0-*" />
-    <ProjectReference Include="..\NServiceBus.CommonLogging\NServiceBus.CommonLogging.csproj" />
   </ItemGroup>
 </Project>
