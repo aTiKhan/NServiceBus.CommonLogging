@@ -5,34 +5,22 @@ using NServiceBus;
 
 class Program
 {
-    static void Main()
+    static async Task Main()
     {
-        AsyncMain().GetAwaiter().GetResult();
-    }
-
-    static async Task AsyncMain()
-    {
-        LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
+        LogManager.Adapter = new FactoryAdapter();
 
         NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
 
-        var endpointConfiguration = new EndpointConfiguration("CommonLoggingSample");
-        endpointConfiguration.EnableInstallers();
-        endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.UseTransport<LearningTransport>();
-        endpointConfiguration.UsePersistence<InMemoryPersistence>();
-        var endpoint = await Endpoint.Start(endpointConfiguration)
+        var configuration = new EndpointConfiguration("CommonLoggingSample");
+        configuration.EnableInstallers();
+        configuration.UseTransport<LearningTransport>();
+        var endpoint = await Endpoint.Start(configuration)
             .ConfigureAwait(false);
-        try
-        {
-            await endpoint.SendLocal(new MyMessage())
-                .ConfigureAwait(false);
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-        }
-        finally
-        {
-            await endpoint.Stop();
-        }
+        await endpoint.SendLocal(new MyMessage())
+            .ConfigureAwait(false);
+        Console.WriteLine("Press any key to exit");
+        Console.ReadKey();
+        await endpoint.Stop()
+            .ConfigureAwait(false);
     }
 }

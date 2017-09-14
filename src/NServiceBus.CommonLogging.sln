@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus.CommonLogging", "NServiceBus.CommonLogging\NServiceBus.CommonLogging.csproj", "{17097D26-641A-4A26-BD4A-39DB66964774}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus.CommonLogging.Tests", "NServiceBus.CommonLogging.Tests\NServiceBus.CommonLogging.Tests.csproj", "{683F33A2-9DB0-4A8F-8CCC-8C7BC320DC20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{683F33A2-9DB0-4A8F-8CCC-8C7BC320DC20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
