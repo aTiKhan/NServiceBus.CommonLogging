@@ -10,7 +10,6 @@
   <PropertyGroup>
     <Description>CommonLogging support for NServiceBus</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageTags>NServiceBus logging commonlogging</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Common.Logging" Version="[3.4.0, 4.0.0)" />
