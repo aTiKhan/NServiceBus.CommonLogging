@@ -10,6 +10,7 @@
   <PropertyGroup>
     <Description>CommonLogging support for NServiceBus</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://docs.particular.net/nuget/NServiceBus.CommonLogging</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Common.Logging" Version="[3.4.0, 4.0.0)" />
