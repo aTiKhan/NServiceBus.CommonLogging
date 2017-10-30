@@ -1,20 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)NServiceBus.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>CS0419</NoWarn>
   </PropertyGroup>
+
   <PropertyGroup>
     <Description>CommonLogging support for NServiceBus</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://docs.particular.net/nuget/NServiceBus.CommonLogging</PackageProjectUrl>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Common.Logging" Version="[3.4.0, 4.0.0)" />
     <PackageReference Include="NServiceBus" Version="[7.0.0-*, 8.0.0)" />
-    <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
   </ItemGroup>
+
 </Project>
