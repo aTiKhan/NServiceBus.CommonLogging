@@ -9,7 +9,9 @@ class Program
     {
         LogManager.Adapter = new FactoryAdapter();
 
+#pragma warning disable 0618
         NServiceBus.Logging.LogManager.Use<CommonLoggingFactory>();
+#pragma warning restore 0618
 
         var configuration = new EndpointConfiguration("CommonLoggingSample");
         configuration.EnableInstallers();
