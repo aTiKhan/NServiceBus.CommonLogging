@@ -12,7 +12,9 @@ public class IntegrationTests
     {
         CommonLogManager.Adapter = new MemoryAdapter();
 
+#pragma warning disable 0618
         NsbLogManager.Use<CommonLoggingFactory>();
+#pragma warning restore 0618
 
         var endpointConfiguration = new EndpointConfiguration("CommonLoggingTests");
         endpointConfiguration.EnableInstallers();
