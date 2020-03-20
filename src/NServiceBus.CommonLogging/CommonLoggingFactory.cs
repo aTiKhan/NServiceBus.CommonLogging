@@ -7,7 +7,7 @@
     /// Configure NServiceBus logging messages to use CommonLogging. Use by calling <see cref="LogManager.Use{T}"/> the T is <see cref="CommonLoggingFactory"/>.
     /// </summary>
     [ObsoleteEx(
-        Message = "Support for external logging providers is no longer provided by NServiceBus providers for each logging framework. Instead, the NServiceBus.Extensions.Logging library provides the ability to use any logging provider that conforms to the Microsoft.Extensions.Logging abstraction.",
+        Message = "NServiceBus is now providing support for logging libraries through the Microsoft.Extensions.Logging abstraction. Remove the NServiceBus.CommonLogging package. Install NServiceBus.Extensions.Logging and logging provider package of choice instead.",
         RemoveInVersion = "7.0.0",
         TreatAsErrorFromVersion = "6.0.0")]
     public class CommonLoggingFactory : LoggingFactoryDefinition
